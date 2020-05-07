@@ -67,7 +67,7 @@ public class PullRequestOverviewProcessor implements PullRequestProcessor {
 
     private ExecutorService singleExecutorService;
 
-    private static final boolean devProfile = System.getProperty("prbz-dev") != null;
+    private static final boolean devProfile = System.getProperty("prbz_dev") != null;
 
     @Override
     public void init(Aphrodite aphrodite) {

@@ -79,7 +79,7 @@ public class Util {
     private static int LAST_PAYLOAD = 5;
 
 
-    private static final boolean devProfile = System.getProperty("prbz-dev") != null;
+    private static final boolean devProfile = System.getProperty("prbz_dev") != null;
 
     // We are only care about following components defined in jboss-streams
     public static boolean filterComponent(StreamComponent component) {

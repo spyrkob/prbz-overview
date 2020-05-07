@@ -89,7 +89,7 @@ public class Aider {
     private static final Object pullRequestDataLock = new Object();
     private static final Object payloadDataLock = new Object();
 
-    private static final boolean devProfile = System.getProperty("prbz-dev") != null;
+    private static final boolean devProfile = System.getProperty("prbz_dev") != null;
 
     @PostConstruct
     public void init() {
