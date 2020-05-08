@@ -78,8 +78,8 @@ public class Util {
     private static int DEVMODE_PAYLOAD = 2;
     private static int LAST_PAYLOAD = 5;
 
-
-    private static final boolean devProfile = System.getProperty("prbz_dev") != null;
+    private static final String PRBZ_DEV = "prbz_dev";
+    private static final boolean devProfile = getDevProfile();
 
     // We are only care about following components defined in jboss-streams
     public static boolean filterComponent(StreamComponent component) {
@@ -219,5 +219,13 @@ public class Util {
                 .setMaxResults(maxResults)
                 .build();
         return aphrodite.searchIssues(sc);
+    }
+
+    public static boolean getDevProfile() {
+        String devProfile = System.getProperty(PRBZ_DEV);
+        if (devProfile == null) {
+            return Boolean.valueOf(System.getenv(PRBZ_DEV));
+        }
+        return Boolean.valueOf(devProfile);
     }
 }

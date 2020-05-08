@@ -54,6 +54,7 @@ import org.jboss.set.assist.evaluator.Evaluator;
 import org.jboss.set.assist.evaluator.EvaluatorContext;
 import org.jboss.set.assist.processor.ProcessorException;
 import org.jboss.set.assist.processor.PullRequestProcessor;
+import org.jboss.set.overview.Util;
 
 public class PullRequestOverviewProcessor implements PullRequestProcessor {
 
@@ -67,7 +68,7 @@ public class PullRequestOverviewProcessor implements PullRequestProcessor {
 
     private ExecutorService singleExecutorService;
 
-    private static final boolean devProfile = System.getProperty("prbz_dev") != null;
+    private static final boolean devProfile = Util.getDevProfile();
 
     @Override
     public void init(Aphrodite aphrodite) {

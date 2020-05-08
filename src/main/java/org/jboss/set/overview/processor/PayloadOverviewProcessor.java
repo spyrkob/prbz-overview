@@ -54,6 +54,7 @@ import org.jboss.set.assist.evaluator.PayloadEvaluator;
 import org.jboss.set.assist.evaluator.PayloadEvaluatorContext;
 import org.jboss.set.assist.processor.PayloadProcessor;
 import org.jboss.set.assist.processor.ProcessorException;
+import org.jboss.set.overview.Util;
 
 /**
  * @author wangc
@@ -71,7 +72,7 @@ public class PayloadOverviewProcessor implements PayloadProcessor {
 
     private ExecutorService singleExecutorService;
 
-    private static final boolean devProfile = System.getProperty("prbz_dev") != null;
+    private static final boolean devProfile = Util.getDevProfile();
 
     @Override
     public void init(Aphrodite aphrodite){
