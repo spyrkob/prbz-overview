@@ -305,7 +305,7 @@ public class Aider {
         });
     }
 
-    @Schedule(hour = "0,2,4,6,8,10,12,14,16,18,20,22")
+    @Schedule(hour = "0,2,4,6,8,10,12,14,16,18,20,22", minute = "30")
     public void updatePullRequestData() {
         if (devProfile) return;
         logger.info("schedule pull request data update is started ...");
@@ -319,7 +319,7 @@ public class Aider {
         }
     }
 
-    @Schedule(hour = "1,3,5,7,9,11,13,15,17,19,21,23")
+    @Schedule(hour = "1,3,5,7,9,11,13,15,17,19,21,23", minute = "30")
     public void updatePayloadData() {
         if (devProfile) return;
         logger.info("schedule payload data update is started ...");
