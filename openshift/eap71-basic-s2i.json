@@ -39,7 +39,7 @@
             "displayName": "Git Repository URL",
             "description": "Git source URI for application",
             "name": "SOURCE_REPOSITORY_URL",
-            "value": "https://github.com/soul2zimate/jboss-eap-quickstarts",
+            "value": "https://github.com/soul2zimate/prbz-overview",
             "required": true
         },
         {
@@ -47,13 +47,6 @@
             "description": "Git branch/tag reference",
             "name": "SOURCE_REPOSITORY_REF",
             "value": "openshift",
-            "required": false
-        },
-        {
-            "displayName": "Context Directory",
-            "description": "Path within Git project to build; empty for root project directory.",
-            "name": "CONTEXT_DIR",
-            "value": "helloworld",
             "required": false
         },
         {
@@ -127,7 +120,7 @@
             "displayName": "Maven Additional Arguments",
             "description": "Maven additional arguments to use for S2I builds",
             "name": "MAVEN_ARGS_APPEND",
-            "value": "-Dcom.redhat.xpaas.repo.jbossorg",
+            "value": "-Dcom.redhat.xpaas.repo.jbossorg -Dnorpm",
             "required": false
         },
         {
@@ -137,8 +130,26 @@
             "required": false
         },
         {
+            "description": "Container cpu limit",
+            "name": "CPU_LIMIT",
+            "value": "2",
+            "required": false
+        },
+        {
+            "description": "Container cpu request",
+            "name": "CPU_REQUEST",
+            "value": "1",
+            "required": false
+        },
+        {
             "description": "Container memory limit",
             "name": "MEMORY_LIMIT",
+            "value": "1Gi",
+            "required": false
+        },
+        {
+            "description": "Container memory request",
+            "name": "MEMORY_REQUEST",
             "value": "1Gi",
             "required": false
         }
@@ -240,7 +251,6 @@
                         "uri": "${SOURCE_REPOSITORY_URL}",
                         "ref": "${SOURCE_REPOSITORY_REF}"
                     },
-                    "contextDir": "${CONTEXT_DIR}"
                 },
                 "strategy": {
                     "type": "Source",
@@ -369,7 +379,12 @@
                                 ],
                                 "resources": {
                                     "limits": {
+                                        "cpu":  "${CPU_LIMIT}",
                                         "memory": "${MEMORY_LIMIT}"
+                                    },
+                                    "requests": {
+                                        "cpu":  "${CPU_REQUEST}",
+                                        "memory": "${MEMORY_REQUEST}"
                                     }
                                 },
                                 "livenessProbe": {
@@ -380,7 +395,7 @@
                                             "/opt/eap/bin/livenessProbe.sh"
                                         ]
                                     },
-                                    "initialDelaySeconds": 60
+                                    "initialDelaySeconds": 600
                                 },
                                 "readinessProbe": {
                                     "exec": {
