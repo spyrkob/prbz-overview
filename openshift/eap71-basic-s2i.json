@@ -39,7 +39,7 @@
             "displayName": "Git Repository URL",
             "description": "Git source URI for application",
             "name": "SOURCE_REPOSITORY_URL",
-            "value": "https://github.com/soul2zimate/prbz-overview",
+            "value": "https://github.com/jboss-set/prbz-overview",
             "required": true
         },
         {

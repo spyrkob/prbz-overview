@@ -1,10 +1,11 @@
+
 [![Build Status](https://travis-ci.org/jboss-set/prbz-overview.svg?branch=master)](https://travis-ci.org/jboss-set/prbz-overview)
 prbz-overview
 =============
 
 Overview page for GitHub repository pull request and payload tracker issues.
 
-#Configuration
+### Configuration
 ------------
 Before deploying the war file,  please provide required properties in the configuration file "aphrodite.properties.json" and payload tracker metadata in "payload.properties", then specify files path as system property "aphrodite.config" and "payload.properties".
 
@@ -47,7 +48,7 @@ For development purposes you can use a dev profile that will retrieve a small po
 
     <property name="prbz_dev" value="true"/>
 
-#Deployment
+### Deployment
 ------------
 
 ```
@@ -58,3 +59,9 @@ Copy generated war file to $JBOSS_HOME/standalone/deployments/ and visit http://
 For instance on thunder: [OverviewPage](https://thunder.sin2.redhat.com/prbz-overview)
 
 In order to avoid potential Github API rate limitation, the scheduled update task updates one payload and one stream Github repositories per hour. Therefore, it may take a bit longer to see all streams / payloads information for the first deployment.
+
+### prbz-overview on Openshift Open Platform
+------------
+
+Plesse refer the the README.md inside the openshfit directory for the OpenShfit Open Platform deployment configuraitons.
+
