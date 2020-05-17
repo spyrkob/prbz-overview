@@ -38,6 +38,10 @@ After we created the secret, we also need to define several configuration.
 
     oc create configmap aphrodite-configmap --from-literal=aphrodite.config=/etc/secret/aphrodite.properties.json.example --from-literal=prbz_dev=false --from-literal=cacheDir=/home/jboss --from-literal=cacheName=github-cache  --from-literal=cacheSize=20
 
+Otherwise, we can create it from the aphrodite-configmap.yaml
+
+    oc create -f aphrodite-configmap.yaml
+
 Noticed that we will reuse **/etc/secret** as the mount volume path later in DeploymentConfig.
 
 ## JBoss EAP 7.1 based application
