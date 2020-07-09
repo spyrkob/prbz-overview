@@ -17,14 +17,19 @@
 
 package org.jboss.set.overview;
 
+import javax.naming.NameNotFoundException;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.net.URL;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.jboss.set.aphrodite.domain.Flag;
 import org.jboss.set.aphrodite.domain.FlagStatus;
 import org.jboss.set.aphrodite.domain.Issue;
+import org.jboss.set.aphrodite.issue.trackers.jira.JiraIssue;
 
 @XmlRootElement(name = "issue")
 public class SimpleIssue {
@@ -35,6 +40,8 @@ public class SimpleIssue {
     private Map<String, String> acks = new HashMap<>();
     private String status;
     private String priority;
+    private List<URL> patches;
+    private List<URL> linkedIncorporatesIssues;
 
     public static SimpleIssue from(Issue issue) {
         SimpleIssue simpleIssue = new SimpleIssue();
@@ -50,8 +57,27 @@ public class SimpleIssue {
         simpleIssue.putAcks(acks);
         simpleIssue.putStatus(issue.getStatus().name());
         simpleIssue.putPriority(issue.getPriority().name());
+        try {
+            simpleIssue.setPatches(issue.getPatches().map(p->p.getUrl()).collect(Collectors.toList()));
+        } catch (NameNotFoundException e) {
+            simpleIssue.setPatches(Collections.emptyList());
+            e.printStackTrace();
+        }
+        if (issue instanceof JiraIssue) {
+            simpleIssue.setIncorporatedIssues(((JiraIssue) issue).getLinkedIncorporatesIssues());
+        } else {
+            simpleIssue.setIncorporatedIssues(Collections.emptyList());
+        }
 
         return simpleIssue;
+    }
+
+    private void setIncorporatedIssues(List<URL> linkedIncorporatesIssues) {
+        this.linkedIncorporatesIssues = linkedIncorporatesIssues;
+    }
+
+    private void setPatches(List<URL> patches) {
+        this.patches = patches;
     }
 
     private void putPriority(String priority) {
